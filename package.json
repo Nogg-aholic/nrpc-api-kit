@@ -2,19 +2,40 @@
   "name": "@nogg-aholic/nrpc-api-kit",
   "version": "0.1.0",
   "description": "Shared helpers for nRPC 0.4.0 service transport and code generation",
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./build": {
-      "types": "./src/build/generate.ts",
-      "import": "./src/build/generate.ts"
+      "types": "./dist/build/generate.d.ts",
+      "import": "./dist/build/generate.js"
     }
   },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
+  },
+  "keywords": [
+    "rpc",
+    "nrpc",
+    "transport",
+    "typescript",
+    "bun"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "type-check": "tsc --noEmit -p tsconfig.json"
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "build": "bunx tsc -p ./tsconfig.json",
+    "prepack": "bun run build"
   },
   "dependencies": {
     "@nogg-aholic/nrpc": "latest"
